@@ -88,7 +88,8 @@ async function main() {
 
   console.log('\nCredentials saved to:', CREDS_PATH);
   console.log('\nYou can now use OpenCode with Qwen models:');
-  console.log('  opencode --model qwen/qwen3-coder-plus');
+  console.log('  opencode --provider qwen-code --model coder-model');
+  console.log('  opencode --provider qwen-code --model vision-model');
 
   rl.close();
 }

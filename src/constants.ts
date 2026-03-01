@@ -34,45 +34,24 @@ export const QWEN_API_CONFIG = {
 // OAuth callback port (para futuro Device Flow no plugin)
 export const CALLBACK_PORT = 14561;
 
-// Available Qwen models through OAuth (portal.qwen.ai)
-// Testados e confirmados funcionando via token OAuth
+// Available Qwen OAuth models for OpenCode
 export const QWEN_MODELS = {
-  // --- Coding Models ---
-  'qwen3-coder-plus': {
-    id: 'qwen3-coder-plus',
-    name: 'Qwen3 Coder Plus',
-    contextWindow: 1048576, // 1M tokens
-    maxOutput: 65536, // 64K tokens
-    description: 'Most capable Qwen coding model with 1M context window',
-    reasoning: false,
-    cost: { input: 0, output: 0 }, // Free via OAuth
-  },
-  'qwen3-coder-flash': {
-    id: 'qwen3-coder-flash',
-    name: 'Qwen3 Coder Flash',
-    contextWindow: 1048576,
-    maxOutput: 65536,
-    description: 'Faster Qwen coding model for quick responses',
-    reasoning: false,
-    cost: { input: 0, output: 0 },
-  },
-  // --- Alias Models (portal mapeia internamente) ---
+  // OAuth aliases confirmed for this plugin
   'coder-model': {
     id: 'coder-model',
-    name: 'Qwen Coder (auto)',
+    name: 'Qwen Coder (Qwen 3.5 Plus)',
     contextWindow: 1048576,
     maxOutput: 65536,
-    description: 'Auto-routed coding model (maps to qwen3-coder-plus)',
-    reasoning: false,
+    description: 'Text-to-text coding model with 1M context and 65,536 max output',
+    reasoning: true,
     cost: { input: 0, output: 0 },
   },
-  // --- Vision Model ---
   'vision-model': {
     id: 'vision-model',
-    name: 'Qwen VL Plus (vision)',
+    name: 'Qwen VL Plus (Vision)',
     contextWindow: 131072, // 128K tokens
     maxOutput: 8192, // 8K tokens
-    description: 'Vision-language model (maps to qwen3-vl-plus), supports image input',
+    description: 'Text and image input model with 128K context and 8,192 max output',
     reasoning: false,
     cost: { input: 0, output: 0 },
   },

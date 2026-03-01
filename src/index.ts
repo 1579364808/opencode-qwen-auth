@@ -5,14 +5,14 @@
  * Implementa Device Flow (RFC 8628) para autenticacao.
  *
  * Provider: qwen-code -> portal.qwen.ai/v1
- * Modelos: qwen3-coder-plus, qwen3-coder-flash, coder-model, vision-model
+ * Modelos: coder-model, vision-model
  */
 
 import { spawn } from 'node:child_process';
 
 import { QWEN_PROVIDER_ID, QWEN_API_CONFIG, QWEN_MODELS } from './constants.js';
 import type { QwenCredentials } from './types.js';
-import { saveCredentials } from './plugin/auth.js';
+import { saveCredentials, loadCredentials } from './plugin/auth.js';
 import {
   generatePKCE,
   requestDeviceAuthorization,
@@ -39,10 +39,47 @@ function openBrowser(url: string): void {
   }
 }
 
+function normalizeVerificationUrl(candidate?: string): string {
+  if (typeof candidate === 'string' && candidate.trim().length > 0) {
+    try {
+      const parsed = new URL(candidate);
+      if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+        return parsed.toString();
+      }
+    } catch {
+      // Fallback below
+    }
+  }
+  return 'https://chat.qwen.ai';
+}
+
 /** Obtem um access token valido (com refresh se necessario) */
 async function getValidAccessToken(
   getAuth: () => Promise<{ type: string; access?: string; refresh?: string; expires?: number }>,
 ): Promise<string | null> {
+  const now = Date.now();
+
+  // 1) Prefer qwen-code compatible local credentials (~/.qwen/oauth_creds.json)
+  const localCreds = loadCredentials();
+  if (localCreds?.accessToken) {
+    const isExpired = typeof localCreds.expiryDate === 'number' && now > localCreds.expiryDate - 60_000;
+
+    if (!isExpired) {
+      return localCreds.accessToken;
+    }
+
+    if (localCreds.refreshToken) {
+      try {
+        const refreshed = await refreshAccessToken(localCreds.refreshToken);
+        saveCredentials(refreshed);
+        return refreshed.accessToken;
+      } catch {
+        // Continue to SDK auth fallback below
+      }
+    }
+  }
+
+  // 2) Fallback to OpenCode SDK auth state
   const auth = await getAuth();
 
   if (!auth || auth.type !== 'oauth') {
@@ -52,16 +89,16 @@ async function getValidAccessToken(
   let accessToken = auth.access;
 
   // Refresh se expirado (com margem de 60s)
-  if (accessToken && auth.expires && Date.now() > auth.expires - 60_000 && auth.refresh) {
+  if (accessToken && auth.expires && now > auth.expires - 60_000 && auth.refresh) {
     try {
       const refreshed = await refreshAccessToken(auth.refresh);
       accessToken = refreshed.accessToken;
       saveCredentials(refreshed);
     } catch (e) {
-      const detail = e instanceof Error ? e.message : String(e);
-      logTechnicalDetail(`Token refresh falhou: ${detail}`);
-      accessToken = undefined;
-    }
+        const detail = e instanceof Error ? e.message : String(e);
+        logTechnicalDetail(`Token refresh falhou: ${detail}`);
+        accessToken = undefined;
+      }
   }
 
   return accessToken ?? null;
@@ -105,12 +142,15 @@ export const QwenAuthPlugin = async (_input: unknown) => {
 
             try {
               const deviceAuth = await requestDeviceAuthorization(challenge);
-              openBrowser(deviceAuth.verification_uri_complete);
+              const verificationUrl = normalizeVerificationUrl(
+                deviceAuth.verification_uri_complete || deviceAuth.verification_uri
+              );
+              openBrowser(verificationUrl);
 
               const POLLING_MARGIN_MS = 3000;
 
               return {
-                url: deviceAuth.verification_uri_complete,
+                url: verificationUrl,
                 instructions: `Codigo: ${deviceAuth.user_code}`,
                 method: 'auto' as const,
                 callback: async () => {
@@ -150,7 +190,7 @@ export const QwenAuthPlugin = async (_input: unknown) => {
             } catch (e) {
               const msg = e instanceof Error ? e.message : 'Erro desconhecido';
               return {
-                url: '',
+                url: 'https://chat.qwen.ai',
                 instructions: `Erro: ${msg}`,
                 method: 'auto' as const,
                 callback: async () => ({ type: 'failed' as const }),
@@ -177,7 +217,10 @@ export const QwenAuthPlugin = async (_input: unknown) => {
               reasoning: m.reasoning,
               limit: { context: m.contextWindow, output: m.maxOutput },
               cost: m.cost,
-              modalities: { input: ['text'], output: ['text'] },
+              modalities: {
+                input: id === 'vision-model' ? ['text', 'image'] : ['text'],
+                output: ['text'],
+              },
             },
           ])
         ),

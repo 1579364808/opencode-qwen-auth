@@ -8,9 +8,9 @@
   <img src="assets/screenshot.png" alt="OpenCode with Qwen Code" width="800">
 </p>
 
-**Authenticate OpenCode CLI with your qwen.ai account.** This plugin enables you to use Qwen models (Coder, Max, Plus and more) with **2,000 free requests per day** - no API key or credit card required!
+**Authenticate OpenCode CLI with your qwen.ai account.** This plugin enables you to use Qwen OAuth models (`coder-model` and `vision-model`) with **2,000 free requests per day** - no API key or credit card required!
 
-[🇧🇷 Leia em Português](./README.pt-BR.md)
+[🇨🇳 中文文档](./README.zh-CN.md)
 
 ## ✨ Features
 
@@ -69,28 +69,16 @@ Select **"Qwen Code (qwen.ai OAuth)"**
 
 ## 🎯 Available Models
 
-### Coding Models
-
-| Model | Context | Max Output | Best For |
-|-------|---------|------------|----------|
-| `qwen3-coder-plus` | 1M tokens | 64K tokens | Complex coding tasks |
-| `qwen3-coder-flash` | 1M tokens | 64K tokens | Fast coding responses |
-
-### General Purpose Models
-
-| Model | Context | Max Output | Reasoning | Best For |
-|-------|---------|------------|-----------|----------|
-| `qwen3-max` | 256K tokens | 64K tokens | No | Flagship model, complex reasoning and tool use |
-| `qwen-plus-latest` | 128K tokens | 16K tokens | Yes | Balanced quality-speed with thinking mode |
-| `qwen3-235b-a22b` | 128K tokens | 32K tokens | Yes | Largest open-weight MoE with thinking mode |
-| `qwen-flash` | 1M tokens | 8K tokens | No | Ultra-fast, low-cost simple tasks |
+| Model | ID | Input | Output | Context | Max Output | Cost |
+|-------|----|-------|--------|---------|------------|------|
+| Qwen Coder (Qwen 3.5 Plus) | `coder-model` | text | text | 1M tokens | 65,536 tokens | Free |
+| Qwen VL Plus (Vision) | `vision-model` | text, image | text | 128K tokens | 8,192 tokens | Free |
 
 ### Using a specific model
 
 ```bash
-opencode --provider qwen-code --model qwen3-coder-plus
-opencode --provider qwen-code --model qwen3-max
-opencode --provider qwen-code --model qwen-plus-latest
+opencode --provider qwen-code --model coder-model
+opencode --provider qwen-code --model vision-model
 ```
 
 ## ⚙️ How It Works
@@ -140,7 +128,7 @@ The `qwen-code` provider is added via plugin. In the `opencode auth login` comma
 ### Rate limit exceeded (429 errors)
 
 - Wait until midnight UTC for quota reset
-- Try using `qwen3-coder-flash` for faster, lighter requests
+- Switch to another Qwen account and login again if quota is exhausted
 - Consider [DashScope API](https://dashscope.aliyun.com) for higher limits
 
 ## 🛠️ Development
