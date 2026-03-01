@@ -171,6 +171,11 @@ src/
 - [qwen-code](https://github.com/QwenLM/qwen-code) - Official Qwen coding CLI
 - [OpenCode](https://opencode.ai) - AI-powered CLI for development
 
+## Links
+
+- [npm package](https://www.npmjs.com/package/@melodyoftears/opencode-qwen-auth)
+- [GitHub repository](https://github.com/1579364808/opencode-qwen-auth)
+
 ## Support
 
 If this project helps you, you can buy me a coffee:
