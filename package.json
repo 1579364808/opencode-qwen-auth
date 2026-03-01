@@ -1,6 +1,6 @@
 {
   "name": "@melodyoftears/opencode-qwen-auth",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Qwen OAuth authentication plugin for OpenCode - Access Qwen AI models (Coder, Vision) with your qwen.ai account",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
