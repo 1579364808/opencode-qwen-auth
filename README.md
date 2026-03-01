@@ -1,8 +1,8 @@
 # OpenCode Qwen Auth Plugin
 
-![npm version](https://img.shields.io/npm/v/@melodyoftears/opencode-qwen-auth)
-![npm downloads](https://img.shields.io/npm/dm/@melodyoftears/opencode-qwen-auth)
-![GitHub stars](https://img.shields.io/github/stars/1579364808/opencode-qwen-auth)
+[![npm version](https://img.shields.io/npm/v/@melodyoftears/opencode-qwen-auth)](https://www.npmjs.com/package/@melodyoftears/opencode-qwen-auth)
+[![npm downloads](https://img.shields.io/npm/dm/@melodyoftears/opencode-qwen-auth)](https://www.npmjs.com/package/@melodyoftears/opencode-qwen-auth)
+[![GitHub stars](https://img.shields.io/github/stars/1579364808/opencode-qwen-auth)](https://github.com/1579364808/opencode-qwen-auth)
 
 Authenticate OpenCode CLI with your qwen.ai account using OAuth Device Flow. This plugin enables you to use Qwen AI models (`coder-model` and `vision-model`) with free daily quota - no API key or credit card required.
 

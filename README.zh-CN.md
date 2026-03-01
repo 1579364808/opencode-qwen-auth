@@ -1,8 +1,8 @@
 # OpenCode Qwen Auth 插件
 
-![npm version](https://img.shields.io/npm/v/@melodyoftears/opencode-qwen-auth)
-![npm downloads](https://img.shields.io/npm/dm/@melodyoftears/opencode-qwen-auth)
-![GitHub stars](https://img.shields.io/github/stars/1579364808/opencode-qwen-auth)
+[![npm version](https://img.shields.io/npm/v/@melodyoftears/opencode-qwen-auth)](https://www.npmjs.com/package/@melodyoftears/opencode-qwen-auth)
+[![npm downloads](https://img.shields.io/npm/dm/@melodyoftears/opencode-qwen-auth)](https://www.npmjs.com/package/@melodyoftears/opencode-qwen-auth)
+[![GitHub stars](https://img.shields.io/github/stars/1579364808/opencode-qwen-auth)](https://github.com/1579364808/opencode-qwen-auth)
 
 使用 qwen.ai 账号为 OpenCode CLI 登录。该插件可让你使用 Qwen OAuth 模型（`coder-model` 与 `vision-model`），享受每天免费请求额度，无需 API Key 或信用卡。
 
