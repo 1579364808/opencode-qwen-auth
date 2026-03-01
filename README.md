@@ -1,6 +1,6 @@
 # 🤖 Qwen Code OAuth Plugin for OpenCode
 
-![npm version](https://img.shields.io/npm/v/opencode-qwencode-auth)
+![npm version](https://img.shields.io/npm/v/%40melodyoftears%2Fopencode-qwen-auth)
 ![License](https://img.shields.io/github/license/1579364808/opencode-qwen-auth)
 ![GitHub stars](https://img.shields.io/github/stars/1579364808/opencode-qwen-auth)
 
@@ -31,7 +31,7 @@
 ### 1. Install the plugin
 
 ```bash
-cd ~/.opencode && npm install opencode-qwencode-auth
+cd ~/.opencode && npm install @melodyoftears/opencode-qwen-auth
 ```
 
 ### 2. Enable the plugin
@@ -40,7 +40,7 @@ Edit `~/.opencode/opencode.jsonc`:
 
 ```json
 {
-  "plugin": ["opencode-qwencode-auth"]
+  "plugin": ["@melodyoftears/opencode-qwen-auth"]
 }
 ```
 
@@ -152,7 +152,7 @@ Edit `~/.opencode/package.json`:
 ```json
 {
   "dependencies": {
-    "opencode-qwencode-auth": "file:///absolute/path/to/opencode-qwencode-auth"
+    "@melodyoftears/opencode-qwen-auth": "file:///absolute/path/to/opencode-qwencode-auth"
   }
 }
 ```
