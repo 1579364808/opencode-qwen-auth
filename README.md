@@ -167,6 +167,14 @@ src/
 - [qwen-code](https://github.com/QwenLM/qwen-code) - Official Qwen coding CLI
 - [OpenCode](https://opencode.ai) - AI-powered CLI for development
 
+## Support
+
+If this project helps you, you can buy me a coffee:
+
+<p align="center">
+  <img src="assets/付款码.png" alt="Payment QR Code" width="300">
+</p>
+
 ## License
 
 MIT

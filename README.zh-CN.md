@@ -167,6 +167,14 @@ src/
 - [qwen-code](https://github.com/QwenLM/qwen-code) - Qwen 官方 CLI
 - [OpenCode](https://opencode.ai) - AI 驱动的开发 CLI
 
+## 支持
+
+如果这个项目帮助到你，可以请我喝杯咖啡：
+
+<p align="center">
+  <img src="assets/付款码.png" alt="付款码" width="300">
+</p>
+
 ## 许可证
 
 MIT
