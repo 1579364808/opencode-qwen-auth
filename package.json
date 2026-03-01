@@ -1,6 +1,6 @@
 {
   "name": "opencode-qwencode-auth",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Qwen OAuth authentication plugin for OpenCode - Access Qwen AI models (Coder, Vision) with your qwen.ai account",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -24,7 +24,7 @@
   ],
   "author": "melodyoftears",
   "license": "MIT",
-"repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/1579364808/opencode-qwen-auth.git"
   },
